@@ -1,0 +1,237 @@
+/* ══════════════════════════════════════════════════════════
+   Leaderboard – Dark Glassmorphism Theme
+   ══════════════════════════════════════════════════════════ */
+.lb-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0f0c29 0%, #1a1744 40%, #24243e 100%);
+  color: #fff;
+  padding: 2rem 1rem;
+}
+.lb-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ── Header ──────────────────────────── */
+.lb-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.lb-header-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1.75rem; color: #fff;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 24px rgba(124,58,237,0.35);
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+.lb-title {
+  font-size: 2.2rem; font-weight: 800; margin: 0 0 0.35rem;
+  background: linear-gradient(135deg, #fff 30%, #a78bfa 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.lb-subtitle {
+  font-size: 1rem; color: rgba(255,255,255,0.5); margin: 0;
+}
+
+/* ── Podium (Top 3) ──────────────────── */
+.lb-podium {
+  display: flex; align-items: flex-end; justify-content: center;
+  gap: 1.25rem; margin-bottom: 2.5rem;
+}
+.lb-podium-card {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 1.25rem;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  width: 180px;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.lb-podium-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+.lb-podium-first {
+  width: 200px;
+  padding: 2rem 1.25rem;
+  border-color: rgba(251,191,36,0.3);
+  box-shadow: 0 4px 32px rgba(251,191,36,0.15);
+}
+.lb-podium-medal {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; margin: 0 auto 0.75rem;
+}
+.lb-gold .lb-podium-medal { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #78350f; }
+.lb-silver .lb-podium-medal { background: linear-gradient(135deg, #e2e8f0, #94a3b8); color: #334155; }
+.lb-bronze .lb-podium-medal { background: linear-gradient(135deg, #d97706, #b45309); color: #fff; }
+
+.lb-podium-avatar {
+  width: 64px; height: 64px; border-radius: 50%; object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.15);
+  margin-bottom: 0.5rem;
+}
+.lb-podium-first .lb-podium-avatar {
+  width: 76px; height: 76px;
+  border-color: rgba(251,191,36,0.4);
+}
+.lb-podium-rank {
+  font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.4);
+  display: block; margin-bottom: 0.25rem;
+}
+.lb-podium-name {
+  font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 0.35rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.lb-podium-points {
+  font-size: 0.85rem; color: #a78bfa; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+}
+.lb-podium-points i { font-size: 0.8rem; }
+
+@media (max-width: 576px) {
+  .lb-podium { gap: 0.75rem; }
+  .lb-podium-card { width: 120px; padding: 1rem 0.75rem; }
+  .lb-podium-first { width: 140px; padding: 1.25rem 0.75rem; }
+  .lb-podium-avatar { width: 48px; height: 48px; }
+  .lb-podium-first .lb-podium-avatar { width: 56px; height: 56px; }
+}
+
+/* ── Table Header ────────────────────── */
+.lb-table-header {
+  display: none;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.75rem;
+  background: rgba(255,255,255,0.04);
+  font-weight: 600; font-size: 0.8rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+@media (min-width: 768px) {
+  .lb-table-header { display: flex; }
+}
+
+/* ── Rows ────────────────────────────── */
+.lb-rows { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.lb-row {
+  display: flex; align-items: center;
+  padding: 0.85rem 1.25rem;
+  border-radius: 1rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  min-height: 64px;
+}
+.lb-row:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(167,139,250,0.25);
+  transform: translateX(4px) translateY(-2px);
+  box-shadow: 0 6px 24px rgba(124,58,237,0.15);
+}
+.lb-row-you {
+  background: rgba(124,58,237,0.12);
+  border: 1.5px solid rgba(167,139,250,0.35);
+}
+
+/* Columns */
+.lb-col-rank { width: 60px; text-align: center; flex-shrink: 0; }
+.lb-col-player { flex: 1; display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
+.lb-col-level, .lb-col-points, .lb-col-modules {
+  width: 110px; text-align: center; flex-shrink: 0;
+  display: none;
+}
+@media (min-width: 768px) {
+  .lb-col-level, .lb-col-points, .lb-col-modules { display: flex; align-items: center; justify-content: center; }
+}
+
+.lb-rank-medal {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 50%;
+  font-weight: 700; font-size: 0.95rem;
+}
+.lb-rank-1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #78350f; }
+.lb-rank-2 { background: linear-gradient(135deg, #e2e8f0, #94a3b8); color: #334155; }
+.lb-rank-3 { background: linear-gradient(135deg, #d97706, #b45309); color: #fff; }
+
+.lb-rank-num {
+  font-weight: 700; font-size: 1.1rem; color: rgba(255,255,255,0.4);
+}
+
+.lb-row-avatar {
+  width: 42px; height: 42px; border-radius: 50%; object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.1); flex-shrink: 0;
+}
+.lb-player-info { min-width: 0; }
+.lb-player-name {
+  font-weight: 600; font-size: 0.95rem; color: #fff;
+  display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.lb-you-badge {
+  display: inline-block; margin-left: 8px;
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 0.65rem; font-weight: 700;
+  background: linear-gradient(135deg, #7c3aed, #4f46e5); color: #fff;
+  vertical-align: middle;
+}
+.lb-player-mobile-stats {
+  font-size: 0.78rem; color: rgba(255,255,255,0.4);
+  display: flex; align-items: center; gap: 4px;
+}
+.lb-player-mobile-stats i { font-size: 0.7rem; }
+@media (min-width: 768px) {
+  .lb-player-mobile-stats { display: none; }
+}
+.lb-dot { opacity: 0.4; }
+
+.lb-level-badge {
+  padding: 0.3rem 0.75rem; border-radius: 2rem;
+  font-size: 0.8rem; font-weight: 600;
+}
+
+.lb-col-points {
+  font-weight: 700; font-size: 0.95rem; color: #a78bfa;
+  gap: 4px;
+}
+.lb-col-points i { font-size: 0.8rem; }
+
+.lb-col-modules {
+  font-weight: 600; font-size: 0.9rem; color: rgba(255,255,255,0.5);
+  gap: 4px;
+}
+.lb-col-modules i { font-size: 0.8rem; }
+
+/* ── Empty & Loading ─────────────────── */
+.lb-empty {
+  text-align: center; padding: 3rem 1rem;
+  color: rgba(255,255,255,0.4);
+}
+.lb-empty i { font-size: 3rem; display: block; margin-bottom: 0.75rem; opacity: 0.5; }
+.lb-empty p { font-size: 1rem; margin: 0; }
+
+.lb-loading {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; min-height: 50vh; gap: 1rem;
+}
+.lb-spinner {
+  width: 48px; height: 48px;
+  border: 4px solid rgba(255,255,255,0.1);
+  border-top-color: #a78bfa;
+  border-radius: 50%;
+  animation: lb-spin 0.8s linear infinite;
+}
+@keyframes lb-spin { to { transform: rotate(360deg); } }
+.lb-loading-text { font-size: 0.9rem; color: rgba(255,255,255,0.5); font-weight: 500; }
+
+.lb-error {
+  text-align: center; padding: 3rem 1rem;
+  color: #f87171;
+}
+.lb-error i { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; }
+.lb-error p { font-size: 1rem; margin: 0; }
