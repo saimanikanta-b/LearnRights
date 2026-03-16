@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { t } from '../utils/translation';
 import { TypewriterText, AnimatedCounter, FadeInOnScroll } from "../components/AnimatedElements";
+import API from "../api/axios";
 import "../styles/Home.css";
 
 const Home = () => {
@@ -11,36 +12,50 @@ const Home = () => {
   const features = [
     {
       icon: "bi-book-half",
-      title: t('home.features.modules.title', { defaultValue: 'Learning Modules' }),
+      title: t('home.features.modules.title', { defaultValue: 'Modules' }),
       description: t('home.features.modules.description', { defaultValue: 'Rights explained with real-life examples and interactive content.' }),
       action: () => navigate("/modules"),
-      actionText: t('home.features.modules.action', { defaultValue: 'Start Learning' }),
+      actionText: t('home.features.modules.action', { defaultValue: 'Learn' }),
       color: "#7c3aed"
     },
     {
       icon: "bi-robot",
-      title: t('home.features.chatbot.title', { defaultValue: 'AI Legal Assistant' }),
+      title: t('home.features.chatbot.title', { defaultValue: 'AI Bot' }),
       description: t('home.features.chatbot.description', { defaultValue: 'Ask legal questions anytime in your preferred language.' }),
       action: () => navigate("/chatbot"),
-      actionText: t('home.features.chatbot.action', { defaultValue: 'Ask Questions' }),
+      actionText: t('home.features.chatbot.action', { defaultValue: 'Ask' }),
       color: "#ec4899"
     },
     {
       icon: "bi-trophy-fill",
-      title: t('home.features.leaderboard.title', { defaultValue: 'Community Leaderboard' }),
+      title: t('home.features.leaderboard.title', { defaultValue: 'Board' }),
       description: t('home.features.leaderboard.description', { defaultValue: 'Earn points, track progress, and compete with others.' }),
       action: () => navigate("/leaderboard"),
-      actionText: t('home.features.leaderboard.action', { defaultValue: 'View Rankings' }),
+      actionText: t('home.features.leaderboard.action', { defaultValue: 'Rank' }),
       color: "#0ea5e9"
     }
   ];
 
-  const stats = [
-    { icon: "bi-people-fill", number: "500+", label: t('home.stats.users', { defaultValue: 'Active Learners' }) },
-    { icon: "bi-journal-richtext", number: "12", label: t('home.stats.modules', { defaultValue: 'Learning Modules' }) },
-    { icon: "bi-translate", number: "13", label: t('home.stats.languages', { defaultValue: 'Languages' }) },
-    { icon: "bi-headset", number: "24/7", label: t('home.stats.support', { defaultValue: 'AI Support' }) }
-  ];
+  const [stats, setStats] = useState([
+    { icon: "bi-people-fill", number: "-", label: t('home.stats.users', { defaultValue: 'Users' }) },
+    { icon: "bi-journal-richtext", number: "-", label: t('home.stats.modules', { defaultValue: 'Modules' }) },
+    { icon: "bi-translate", number: "-", label: t('home.stats.languages', { defaultValue: 'Langs' }) },
+    { icon: "bi-headset", number: "24/7", label: t('home.stats.support', { defaultValue: 'AI Help' }) }
+  ]);
+
+  useEffect(() => {
+    API.get("/admin/public-stats")
+      .then(res => {
+        const data = res.data;
+        setStats([
+          { icon: "bi-people-fill", number: data.totalUsers || "-", label: t('home.stats.users', { defaultValue: 'Users' }) },
+          { icon: "bi-journal-richtext", number: data.totalModules || "-", label: t('home.stats.modules', { defaultValue: 'Modules' }) },
+          { icon: "bi-translate", number: data.totalLanguages || "-", label: t('home.stats.languages', { defaultValue: 'Langs' }) },
+          { icon: "bi-headset", number: "24/7", label: t('home.stats.support', { defaultValue: 'AI Help' }) }
+        ]);
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -67,7 +82,7 @@ const Home = () => {
               {t('home.hero.badge', { defaultValue: 'Legal Education Platform' })}
             </div>
             <h1 className="hm-hero-title">
-              <TypewriterText text={t('home.hero.title', { defaultValue: 'Learn Your Rights' })} speed={60} delay={400} />
+              <TypewriterText text={t('home.hero.title', { defaultValue: 'LR - Learn Rights' })} speed={60} delay={400} />
             </h1>
             <p className="hm-hero-subtitle">
               {t('home.hero.subtitle', { defaultValue: 'Empower Yourself' })}
@@ -81,11 +96,11 @@ const Home = () => {
             <div className="hm-hero-btns">
               <button className="hm-btn hm-btn-primary" onClick={() => navigate("/modules")}>
                 <i className="bi bi-rocket-takeoff-fill"></i>
-                {t('home.hero.start_learning', { defaultValue: 'Start Learning' })}
+                {t('home.hero.start_learning', { defaultValue: 'Learn' })}
               </button>
               <button className="hm-btn hm-btn-outline" onClick={() => navigate("/dashboard")}>
                 <i className="bi bi-grid-1x2-fill"></i>
-                {t('home.hero.view_dashboard', { defaultValue: 'View Dashboard' })}
+                {t('home.hero.view_dashboard', { defaultValue: 'Dash' })}
               </button>
             </div>
           </div>
@@ -114,7 +129,7 @@ const Home = () => {
             <div className="hm-stat-card">
               <i className={`bi ${stat.icon} hm-stat-icon`}></i>
               <div className="hm-stat-num">
-                {stat.number === '24/7' ? '24/7' : <AnimatedCounter end={parseInt(stat.number)} suffix={stat.number.includes('+') ? '+' : ''} duration={1800} />}
+                {stat.number === '24/7' ? '24/7' : <AnimatedCounter end={parseInt(stat.number) || 0} suffix={String(stat.number).includes('+') ? '+' : ''} duration={1800} />}
               </div>
               <div className="hm-stat-label">{stat.label}</div>
             </div>
@@ -127,7 +142,7 @@ const Home = () => {
         <FadeInOnScroll direction="up">
           <div className="hm-section-header">
             <h2 className="hm-section-title">
-              {t('home.features.title', { defaultValue: 'Why Choose Learn Rights?' })}
+              {t('home.features.title', { defaultValue: 'Why LR?' })}
             </h2>
             <p className="hm-section-sub">
               {t('home.features.subtitle', { defaultValue: 'Discover the features that make learning legal rights accessible and engaging.' })}

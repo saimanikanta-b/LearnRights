@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TypewriterText, FadeInOnScroll, AnimatedCounter, StaggeredList } from "../components/AnimatedElements";
+import { TypewriterText, FadeInOnScroll, StaggeredList } from "../components/AnimatedElements";
+import WelcomeStats from "../components/WelcomeStats";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "./Welcome.css";
 
@@ -42,7 +43,7 @@ const Welcome = () => {
               </div>
             </div>
             <h1 className="wlc-brand">
-              <TypewriterText text="Learn Rights" speed={80} delay={300} />
+              <TypewriterText text="LR - Learn Rights" speed={80} delay={300} />
             </h1>
             <p className="wlc-tagline">Know your legal rights in your own language</p>
           </div>
@@ -95,18 +96,8 @@ const Welcome = () => {
 
               {/* Stats Counter Row */}
               <div className="wlc-stats-row">
-                <div className="wlc-stat-item">
-                  <span className="wlc-stat-number"><AnimatedCounter end={500} suffix="+" duration={1500} /></span>
-                  <span className="wlc-stat-label">Users</span>
-                </div>
-                <div className="wlc-stat-item">
-                  <span className="wlc-stat-number"><AnimatedCounter end={12} duration={1200} /></span>
-                  <span className="wlc-stat-label">Modules</span>
-                </div>
-                <div className="wlc-stat-item">
-                  <span className="wlc-stat-number"><AnimatedCounter end={13} duration={1300} /></span>
-                  <span className="wlc-stat-label">Languages</span>
-                </div>
+                {/* Dynamic stats from API */}
+                <WelcomeStats />
               </div>
 
               {/* CTA Buttons */}

@@ -35,12 +35,13 @@
 }
 .hm-badge i { font-size: 0.85rem; }
 .hm-hero-title {
-  font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin: 0 0 0.5rem;
+  font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; margin: 0 0 0.5rem;
   background: linear-gradient(135deg,#fff 30%,#a78bfa 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  overflow-wrap: break-word; word-wrap: break-word; hyphens: auto;
 }
-.hm-hero-subtitle { font-size: 1.15rem; color: #a78bfa; font-weight: 600; margin: 0 0 1rem; }
-.hm-hero-desc { font-size: 1.1rem; line-height: 1.65; color: rgba(255,255,255,0.6); margin: 0 0 2rem; max-width: 480px; }
+.hm-hero-subtitle { font-size: clamp(0.95rem, 2vw, 1.15rem); color: #a78bfa; font-weight: 600; margin: 0 0 1rem; overflow-wrap: break-word; }
+.hm-hero-desc { font-size: clamp(0.9rem, 1.8vw, 1.1rem); line-height: 1.65; color: rgba(255,255,255,0.6); margin: 0 0 2rem; max-width: 480px; overflow-wrap: break-word; }
 
 .hm-hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
 .hm-btn {
@@ -172,11 +173,11 @@
   .hm-hero-desc { margin: 0 auto 2rem; }
   .hm-hero-btns { justify-content: center; }
   .hm-hero-visual { display: none; }
-  .hm-hero-title { font-size: 2.8rem; }
+  .hm-hero-title { font-size: clamp(1.8rem, 5vw, 2.8rem); }
 }
 @media (max-width: 768px) {
   .hm-hero { padding: 60px 20px 40px; min-height: auto; }
-  .hm-hero-title { font-size: 2.2rem; }
+  .hm-hero-title { font-size: clamp(1.6rem, 5vw, 2.2rem); }
   .hm-hero-btns { flex-direction: column; align-items: center; }
   .hm-btn { width: 100%; max-width: 280px; justify-content: center; }
   .hm-features-grid { grid-template-columns: 1fr; }
@@ -184,7 +185,7 @@
   .hm-stats { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 480px) {
-  .hm-hero-title { font-size: 1.8rem; }
+  .hm-hero-title { font-size: clamp(1.4rem, 6vw, 1.8rem); }
   .hm-stats { grid-template-columns: 1fr; }
   .hm-cta-title { font-size: 1.5rem; }
 }

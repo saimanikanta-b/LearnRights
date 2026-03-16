@@ -81,3 +81,23 @@ async def upload_photo(userId: str, profilePhoto: UploadFile = File(...)):
     profile_path = "/uploads/" + name
     db["users"].update_one({"_id": oid}, {"$set": {"profilePhoto": profile_path}})
     return {"message": "Photo uploaded", "profilePhoto": profile_path}
+
+
+@router.delete("/{userId}/photo")
+def delete_photo(userId: str):
+    db = get_db()
+    try:
+        oid = ObjectId(userId)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid user ID")
+    user = db["users"].find_one({"_id": oid})
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    old_photo = user.get("profilePhoto")
+    if old_photo and "/" in old_photo:
+        old_name = old_photo.split("/")[-1]
+        old_path = UPLOAD_DIR / old_name
+        if old_path.exists():
+            old_path.unlink()
+    db["users"].update_one({"_id": oid}, {"$unset": {"profilePhoto": ""}})
+    return {"message": "Photo deleted"}

@@ -9,7 +9,7 @@ def get_leaderboard():
     db = get_db()
     users = list(
         db["users"]
-        .find({}, {"name": 1, "email": 1, "points": 1, "completedModules": 1})
+        .find({}, {"name": 1, "email": 1, "points": 1, "completedModules": 1, "profilePhoto": 1})
         .sort("points", -1)
         .limit(10)
     )

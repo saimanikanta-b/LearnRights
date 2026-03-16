@@ -5,14 +5,14 @@ import { useUser } from '../contexts/UserContext';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const navItems = [
-  { path: "/home", icon: "bi-house-door-fill", labelKey: "home", short: "Home" },
-  { path: "/dashboard", icon: "bi-grid-1x2-fill", labelKey: "dashboard", short: "Dash" },
-  { path: "/modules", icon: "bi-book-half", labelKey: "modules", short: "Learn" },
-  { path: "/quiz", icon: "bi-pencil-square", labelKey: "quiz", short: "Quiz" },
-  { path: "/achievements", icon: "bi-award-fill", labelKey: "achievements", short: "Awards" },
-  { path: "/leaderboard", icon: "bi-trophy-fill", labelKey: "leaderboard", short: "Rank" },
-  { path: "/chatbot", icon: "bi-chat-dots-fill", labelKey: "chatbot", short: "Bot" },
-  { path: "/profile", icon: "bi-person-circle", labelKey: "profile", short: "Me" },
+  { path: "/home", icon: "bi-house-door-fill", labelKey: "home", short: "H" },
+  { path: "/dashboard", icon: "bi-grid-1x2-fill", labelKey: "dashboard", short: "D" },
+  { path: "/modules", icon: "bi-book-half", labelKey: "modules", short: "L" },
+  { path: "/quiz", icon: "bi-pencil-square", labelKey: "quiz", short: "Q" },
+  { path: "/achievements", icon: "bi-award-fill", labelKey: "achievements", short: "A" },
+  { path: "/leaderboard", icon: "bi-trophy-fill", labelKey: "leaderboard", short: "R" },
+  { path: "/chatbot", icon: "bi-chat-dots-fill", labelKey: "chatbot", short: "B" },
+  { path: "/profile", icon: "bi-person-circle", labelKey: "profile", short: "M" },
 ];
 
 const Navbar = () => {
@@ -175,6 +175,7 @@ const Navbar = () => {
       <style>{`
         @keyframes navSlideIn { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 991px) { .nav-desktop-links { display: none !important; } .nav-hamburger { display: flex !important; } }
+        @media (max-width: 600px) { .nav-brand-text { display: none !important; } }
         @media (min-width: 992px) { .nav-mobile-overlay { display: none !important; } }
         .nav-lang-item:hover { background: rgba(124,58,237,0.1) !important; color: #c4b5fd !important; }
         .nav-link-hover:hover { background: rgba(124,58,237,0.1) !important; color: #fff !important; transform: translateY(-2px); }
@@ -198,8 +199,9 @@ const Navbar = () => {
       <nav style={styles.navbar}>
         <div style={styles.inner}>
           {/* Brand */}
-          <Link to="/home" style={styles.brand} onClick={() => setMobileOpen(false)} title="LearnRights">
+          <Link to="/home" style={styles.brand} onClick={() => setMobileOpen(false)} title={t('app_name')}>
             <div style={styles.brandIcon}><i className="bi bi-shield-check"></i></div>
+            <span className="nav-brand-text" style={{ whiteSpace: 'nowrap' }}>{t('app_name')}</span>
           </Link>
 
           {/* Desktop Nav Links */}
@@ -211,7 +213,7 @@ const Navbar = () => {
                   style={styles.navLink(active)} onClick={() => setMobileOpen(false)}
                   title={t(item.labelKey)}>
                   <i className={`bi ${item.icon}`} style={{ fontSize: '1.4rem' }}></i>
-                  <span style={{ fontSize: '0.68rem', fontWeight: active ? 700 : 500, letterSpacing: '0.03em', lineHeight: 1, opacity: active ? 1 : 0.7 }}>{item.short}</span>
+                  <span style={{ fontSize: '0.68rem', fontWeight: active ? 700 : 500, letterSpacing: '0.03em', lineHeight: 1, opacity: active ? 1 : 0.7, maxWidth: 56, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', textAlign: 'center' }}>{t(item.labelKey)}</span>
                 </Link>
               );
             })}

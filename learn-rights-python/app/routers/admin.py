@@ -5,6 +5,28 @@ from app.deps import require_auth
 router = APIRouter()
 
 
+# ── Public stats endpoint (no auth) – used by Home & Welcome pages ────
+@router.get("/public-stats")
+def get_public_stats():
+    """Return basic platform stats without requiring authentication."""
+    db = get_db()
+    total_users = db["users"].count_documents({})
+    total_modules = db["modules"].count_documents({})
+
+    # Count supported languages from language router config
+    try:
+        from app.routers.language import INDIAN_LANGUAGES
+        total_languages = len(INDIAN_LANGUAGES)
+    except Exception:
+        total_languages = 17  # fallback
+
+    return {
+        "totalUsers": total_users,
+        "totalModules": total_modules,
+        "totalLanguages": total_languages,
+    }
+
+
 @router.get("/users", dependencies=[Depends(require_auth)])
 def get_all_users():
     db = get_db()

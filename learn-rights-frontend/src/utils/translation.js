@@ -26,12 +26,16 @@ export const LANGUAGES = [
 
 // ── English base strings (source of truth) ──────────────────────────
 const englishStrings = {
+    // App name (brand / logo)
+    'app_name': 'LR',
+
     // Navigation & General
     home: 'Home',
-    dashboard: 'Dashboard',
+    dashboard: 'Dash',
     modules: 'Modules',
     quiz: 'Quiz',
-    leaderboard: 'Leaderboard',
+    achievements: 'Awards',
+    leaderboard: 'LBoard',
     chatbot: 'Bot',
     profile: 'Profile',
     logout: 'Logout',
@@ -95,7 +99,7 @@ const englishStrings = {
     'chatbot.suggestion2': 'How to file a complaint?',
     'chatbot.suggestion3': 'Legal aid services?',
     'chatbot.suggestion4': 'Domestic violence help?',
-    'chatbot.title': 'Gemini',
+    'chatbot.title': 'Bot',
     'chatbot.subtitle': 'Legal rights assistant',
     'chatbot.clearChat': 'New chat',
     'chatbot.welcome': 'Ask me anything about your legal rights',

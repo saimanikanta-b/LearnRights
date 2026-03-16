@@ -52,6 +52,20 @@ const Profile = () => {
     }
   };
 
+  const handlePhotoDelete = async () => {
+    if (!userId || !user?.profilePhoto) return;
+    setUploadError("");
+    setUploading(true);
+    try {
+      await axios.delete(`/profile/${userId}/photo`);
+      await refreshUserData();
+    } catch (err) {
+      setUploadError(err.response?.data?.detail || err.message || "Delete failed");
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleSaveProfile = async (e) => {
     e.preventDefault();
     if (!userId) return;
@@ -121,6 +135,17 @@ const Profile = () => {
                 )}
               </label>
               <input type="file" accept="image/*" id="pf-photo-input" onChange={handlePhotoChange} disabled={uploading} className="pf-file-hidden" />
+              {user?.profilePhoto && (
+                <button
+                  type="button"
+                  className="pf-avatar-delete"
+                  title={t("profile.delete_photo", { defaultValue: "Remove photo" })}
+                  onClick={handlePhotoDelete}
+                  disabled={uploading}
+                >
+                  <i className="bi bi-trash-fill"></i>
+                </button>
+              )}
             </div>
             {uploadError && <p className="pf-upload-error">{uploadError}</p>}
 

@@ -7,6 +7,8 @@ import { FadeInOnScroll, AnimatedCounter } from "../components/AnimatedElements"
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../styles/Leaderboard.css';
 
+const API_BASE = process.env.REACT_APP_API_URL?.replace("/api", "") || "http://localhost:5000";
+
 const Leaderboard = () => {
   const { user: contextUser } = useUser();
   const [leaderboard, setLeaderboard] = useState([]);
@@ -53,8 +55,10 @@ const Leaderboard = () => {
     return { name: "Beginner", color: "#94a3b8", bg: "rgba(148,163,184,0.1)" };
   };
 
-  const getAvatar = (name) =>
-    `https://ui-avatars.com/api/?name=${encodeURIComponent(name || "U")}&background=random&color=fff&size=80&bold=true&font-size=0.4`;
+  const getAvatar = (user) => {
+    if (user.profilePhoto) return `${API_BASE}${user.profilePhoto}`;
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name || "U")}&background=random&color=fff&size=80&bold=true&font-size=0.4`;
+  };
 
   const currentUserId = contextUser?._id || contextUser?.id;
 
@@ -114,7 +118,7 @@ const Leaderboard = () => {
                     <div className="lb-podium-medal">
                       <i className={`bi ${medalIcon}`}></i>
                     </div>
-                    <img src={getAvatar(u.name)} alt="" className="lb-podium-avatar" />
+                    <img src={getAvatar(u)} alt="" className="lb-podium-avatar" />
                     <span className="lb-podium-rank">#{rank}</span>
                     <h4 className="lb-podium-name">{u.name}</h4>
                     <span className="lb-podium-points">
@@ -154,7 +158,7 @@ const Leaderboard = () => {
                   )}
                 </div>
                 <div className="lb-col-player">
-                  <img src={getAvatar(u.name)} alt="" className="lb-row-avatar" />
+                  <img src={getAvatar(u)} alt="" className="lb-row-avatar" />
                   <div className="lb-player-info">
                     <span className="lb-player-name">
                       {u.name}

@@ -306,7 +306,7 @@ const Chatbot = () => {
               <i className="bi bi-robot"></i>
             </div>
             <div>
-              <h1 className="cb-title">{t('chatbot.title', { defaultValue: 'Legal Assistant' })}</h1>
+              <h1 className="cb-title">{t('chatbot.title', { defaultValue: 'Bot' })}</h1>
               <p className="cb-subtitle">
                 <span className="cb-status-dot" />
                 {t('chatbot.subtitle', { defaultValue: 'Online · Ready to help' })}
