@@ -36,6 +36,12 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="LearnRights API", version="1.0.0", lifespan=lifespan)
+allow_origins=[
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://learnrights-2.onrender.com",  # ← add this
+],
+
 
 app.add_middleware(
     CORSMiddleware,
