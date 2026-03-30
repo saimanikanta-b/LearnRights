@@ -39,7 +39,7 @@ app = FastAPI(title="LearnRights API", version="1.0.0", lifespan=lifespan)
 allow_origins=[
     "http://localhost:3000",
     "http://localhost:3001",
-    "https://learnrights-2.onrender.com",  # ← add this
+    "https://lr1-bqr1.onrender.com",  # ← add this
 ],
 
 
